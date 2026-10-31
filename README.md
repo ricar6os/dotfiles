@@ -1,49 +1,40 @@
-# ghostty-config
+# dotfiles
 
-Mi configuración de [Ghostty](https://ghostty.org).
+Mi configuración de terminal: [Ghostty](https://ghostty.org) + zsh con [Oh My Zsh](https://ohmyz.sh) y el prompt [Pure](https://github.com/sindresorhus/pure).
+
+```
+ghostty/config   → ~/.config/ghostty/config
+zsh/zshrc        → ~/.zshrc
+zsh/prompt.zsh     (Pure, cargado desde zshrc)
+install.sh         instala dependencias y crea los symlinks
+```
 
 ## Instalación
 
 ```sh
-mkdir -p ~/.config/ghostty
-curl -fsSL https://raw.githubusercontent.com/ricar6os/ghostty-config/main/config -o ~/.config/ghostty/config
+git clone git@github.com:ricar6os/dotfiles.git ~/workspace/dotfiles
+~/workspace/dotfiles/install.sh
 ```
 
-O clona el repo y crea un symlink:
+`install.sh` funciona en macOS (Homebrew) y Ubuntu (apt) y se puede ejecutar varias veces:
 
-```sh
-git clone git@github.com:ricar6os/ghostty-config.git ~/workspace/ghostty-config
-mkdir -p ~/.config/ghostty
-ln -sf ~/workspace/ghostty-config/config ~/.config/ghostty/config
-```
+- Instala `zsh`, `fzf` y Pure (en Linux, Pure se clona en `~/.zsh/pure`).
+- Clona Oh My Zsh y los plugins en `~/.oh-my-zsh/custom/plugins`.
+- Crea los symlinks. Si ya existía un archivo real, lo guarda como `*.backup.<fecha>`.
+- Cambia el shell por defecto a zsh (cierra sesión y vuelve a entrar después).
 
-Recarga con `Cmd + Shift + ,` (macOS) o `Ctrl + Shift + ,` (Linux).
+Recarga Ghostty con `Cmd + Shift + ,` (macOS) o `Ctrl + Shift + ,` (Linux).
 
-## Prompt (Pure)
+## zsh
 
-El prompt es [Pure](https://github.com/sindresorhus/pure), configurado en zsh (no en Ghostty).
+Plugins:
 
-### macOS
+| Plugin | Qué hace |
+| --- | --- |
+| [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) | Colorea el comando mientras escribes: verde si existe, rojo si no |
+| [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) | Sugiere en gris según tu historial; acepta con `→` o `End` |
+| [zsh-completions](https://github.com/zsh-users/zsh-completions) | Completados de `Tab` para más programas |
+| [fzf](https://github.com/junegunn/fzf) | `Ctrl+R` busca en el historial, `Ctrl+T` busca archivos, `Alt+C` cambia de carpeta |
+| git | Alias de git de Oh My Zsh (`gst`, `gco`, `gp`…) |
 
-```sh
-brew install pure
-echo 'source ~/workspace/ghostty-config/zsh/prompt.zsh' >> ~/.zshrc
-```
-
-### Linux (Ubuntu)
-
-No hay Homebrew, así que Pure se clona desde GitHub y se añade a `fpath`:
-
-```sh
-sudo apt install -y zsh
-chsh -s "$(which zsh)"
-git clone --depth=1 https://github.com/sindresorhus/pure.git ~/.zsh/pure
-cat >> ~/.zshrc <<'EOF'
-fpath+=("$HOME/.zsh/pure")
-source "$HOME/workspace/ghostty-config/zsh/prompt.zsh"
-EOF
-```
-
-### Oh My Zsh
-
-Si usas Oh My Zsh, deja `ZSH_THEME=""` y asegúrate de que las líneas anteriores van después de `source $ZSH/oh-my-zsh.sh`.
+Configuración local que no quieras versionar (alias del trabajo, variables, etc.): `~/.zshrc.local`.

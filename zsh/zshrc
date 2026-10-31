@@ -1,0 +1,29 @@
+# ~/.zshrc — gestionado en https://github.com/ricar6os/dotfiles (zsh/zshrc)
+# Cambios locales que no quieras versionar: ~/.zshrc.local
+
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
+
+# Sin tema de Oh My Zsh: el prompt es Pure (ver prompt.zsh)
+ZSH_THEME=""
+
+# zsh-completions se añade a fpath (no como plugin) antes de cargar Oh My Zsh
+fpath+=("$ZSH_CUSTOM/plugins/zsh-completions/src")
+
+# zsh-syntax-highlighting debe ir el último
+plugins=(
+  git
+  fzf
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+# El plugin fzf de Oh My Zsh avisa si fzf no está instalado; quitarlo en ese caso
+(( $+commands[fzf] )) || plugins=(${plugins:#fzf})
+
+source "$ZSH/oh-my-zsh.sh"
+
+# Prompt
+source "${${(%):-%x}:A:h}/prompt.zsh"
+
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

@@ -1,9 +1,10 @@
-# Pure prompt (https://github.com/sindresorhus/pure), installed with Homebrew.
-# Usage: brew install pure, then add to ~/.zshrc:
-#   source ~/workspace/ghostty-config/zsh/prompt.zsh
-# If you use Oh My Zsh, set ZSH_THEME="" and source this after oh-my-zsh.sh.
+# Pure prompt (https://github.com/sindresorhus/pure)
+# - macOS: brew install pure
+# - Linux: git clone --depth=1 https://github.com/sindresorhus/pure.git ~/.zsh/pure
+# Si usas Oh My Zsh, deja ZSH_THEME="" y carga este archivo después de oh-my-zsh.sh.
 
-fpath+=(/opt/homebrew/share/zsh/site-functions)
+fpath+=("$HOME/.zsh/pure")
+[[ -d /opt/homebrew/share/zsh/site-functions ]] && fpath+=(/opt/homebrew/share/zsh/site-functions)
 autoload -U promptinit
 promptinit
 prompt pure
