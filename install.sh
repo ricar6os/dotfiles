@@ -39,7 +39,25 @@ clone zsh-users/zsh-completions "$plugins/zsh-completions"
 
 # Symlinks
 link "$DOTFILES/ghostty/config" "$HOME/.config/ghostty/config"
-link "$DOTFILES/zsh/zshrc" "$HOME/.zshrc"
+link "$DOTFILES/git/config" "$HOME/.config/git/config"
+
+# ~/.zshrc no es un symlink sino un archivo local que carga el del repo: los
+# instaladores (pnpm, fnm…) pueden añadirle líneas sin romper nada ni tocar el repo
+zshrc_source="source \"${DOTFILES/#$HOME/\$HOME}/zsh/zshrc\""
+if ! grep -qxF "$zshrc_source" "$HOME/.zshrc" 2>/dev/null; then
+  if [[ -L "$HOME/.zshrc" ]]; then
+    rm "$HOME/.zshrc"
+  elif [[ -e "$HOME/.zshrc" ]]; then
+    mv "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d%H%M%S)"
+    echo "Copia de seguridad: ~/.zshrc.backup.* (pasa lo que quieras conservar al nuevo ~/.zshrc)"
+  fi
+  printf '%s\n' \
+    "# Config versionada: https://github.com/ricar6os/dotfiles" \
+    "$zshrc_source" \
+    "" \
+    "# Lo de abajo es local de esta máquina (no se versiona)" > "$HOME/.zshrc"
+  echo "~/.zshrc creado (carga $DOTFILES/zsh/zshrc)"
+fi
 
 # Shell por defecto
 zsh_path="$(command -v zsh)"

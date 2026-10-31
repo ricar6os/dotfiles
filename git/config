@@ -1,0 +1,11 @@
+# Config global de git versionada (https://github.com/ricar6os/dotfiles)
+# Git la lee antes que ~/.gitconfig, que queda local para cada máquina
+# (includeIf del trabajo, credenciales que añaden gh y otras herramientas).
+
+[user]
+	name = Ricardo Sánchez Arias
+	email = r.sanchezarias6@gmail.com
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true

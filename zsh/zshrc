@@ -1,5 +1,5 @@
-# ~/.zshrc — gestionado en https://github.com/ricar6os/dotfiles (zsh/zshrc)
-# Cambios locales que no quieras versionar: ~/.zshrc.local
+# Config de zsh versionada (https://github.com/ricar6os/dotfiles)
+# Se carga desde ~/.zshrc, que es local: lo propio de cada máquina va allí.
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
@@ -25,8 +25,6 @@ source "$ZSH/oh-my-zsh.sh"
 
 # Prompt
 source "${${(%):-%x}:A:h}/prompt.zsh"
-
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # fnm
 FNM_PATH="$HOME/.local/share/fnm"
