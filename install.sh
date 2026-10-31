@@ -21,9 +21,11 @@ link() { # link <origen> <destino>; guarda copia si el destino es un archivo rea
 # Paquetes del sistema
 if [[ "$(uname)" == Darwin ]]; then
   brew install zsh fzf pure
+  brew install --cask font-fira-code
 elif command -v apt-get >/dev/null; then
   missing=()
   for p in zsh fzf; do command -v "$p" >/dev/null || missing+=("$p"); done
+  fc-list | grep -qi 'Fira Code' || missing+=(fonts-firacode)
   (( ${#missing[@]} == 0 )) || sudo apt-get install -y "${missing[@]}"
   clone sindresorhus/pure "$HOME/.zsh/pure"
 fi

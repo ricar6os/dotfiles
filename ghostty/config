@@ -50,3 +50,10 @@
 
 theme = GitHub Dark
 font-family = Fira Code
+font-size = 11
+
+# Compacto: poco margen y algo menos de interlineado
+window-padding-x = 2
+window-padding-y = 0
+window-padding-balance = true
+adjust-cell-height = -5%
