@@ -36,7 +36,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:z:*' fzf-preview 'ls -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
-# fnm (Homebrew en macOS, ~/.local/share/fnm con el instalador de Linux)
+# fnm (install.sh lo instala en ~/.local/share/fnm; también vale el de Homebrew)
 FNM_PATH="$HOME/.local/share/fnm"
 [ -d "$FNM_PATH" ] && export PATH="$FNM_PATH:$PATH"
 if (( $+commands[fnm] )); then

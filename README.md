@@ -3,7 +3,7 @@
 Mi configuración de terminal: [Ghostty](https://ghostty.org) + zsh con [Oh My Zsh](https://ohmyz.sh) y el prompt [Pure](https://github.com/sindresorhus/pure).
 
 ```
-ghostty/config   → ~/.config/ghostty/config
+ghostty/config   → ~/.config/ghostty/config (copia)
 git/config       → ~/.config/git/config
 zsh/zshrc          cargado desde ~/.zshrc (ver abajo)
 zsh/prompt.zsh     (Pure, cargado desde zshrc)
@@ -19,9 +19,10 @@ git clone git@github.com:ricar6os/dotfiles.git ~/workspace/dotfiles
 
 `install.sh` funciona en macOS (Homebrew) y Ubuntu (apt) y se puede ejecutar varias veces:
 
-- Instala `zsh`, `fzf`, `zoxide` y Pure (en Linux, Pure se clona en `~/.zsh/pure`).
+- Instala `zsh`, `fzf`, `zoxide`, Pure y [fnm](https://github.com/Schniz/fnm) (con su instalador oficial en `~/.local/share/fnm`) (en Linux, Pure se clona en `~/.zsh/pure`).
 - Clona Oh My Zsh y los plugins en `~/.oh-my-zsh/custom/plugins`.
-- Crea los symlinks. Si ya existía un archivo real, lo guarda como `*.backup.<fecha>`.
+- Copia la config de Ghostty. Si la tuya era distinta, muestra el diff y la guarda como `*.backup.<fecha>`. No es un symlink para que editar Ghostty no cambie el repo sin darte cuenta: si cambias algo que quieras conservar, pásalo al repo y vuelve a ejecutar `install.sh`.
+- Enlaza la config de git. Si ya existía un archivo real, lo guarda como `*.backup.<fecha>`.
 - Crea `~/.zshrc` con una línea que carga `zsh/zshrc` del repo (si ya existía, lo guarda como `~/.zshrc.backup.<fecha>`).
 - Cambia el shell por defecto a zsh (cierra sesión y vuelve a entrar después).
 
