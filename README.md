@@ -19,7 +19,7 @@ git clone git@github.com:ricar6os/dotfiles.git ~/workspace/dotfiles
 
 `install.sh` funciona en macOS (Homebrew) y Ubuntu (apt) y se puede ejecutar varias veces:
 
-- Instala `zsh`, `fzf` y Pure (en Linux, Pure se clona en `~/.zsh/pure`).
+- Instala `zsh`, `fzf`, `zoxide` y Pure (en Linux, Pure se clona en `~/.zsh/pure`).
 - Clona Oh My Zsh y los plugins en `~/.oh-my-zsh/custom/plugins`.
 - Crea los symlinks. Si ya existía un archivo real, lo guarda como `*.backup.<fecha>`.
 - Crea `~/.zshrc` con una línea que carga `zsh/zshrc` del repo (si ya existía, lo guarda como `~/.zshrc.backup.<fecha>`).
@@ -37,6 +37,8 @@ Plugins:
 | [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) | Sugiere en gris según tu historial; acepta con `→` o `End` |
 | [zsh-completions](https://github.com/zsh-users/zsh-completions) | Completados de `Tab` para más programas |
 | [fzf](https://github.com/junegunn/fzf) | `Ctrl+R` busca en el historial, `Ctrl+T` busca archivos, `Alt+C` cambia de carpeta |
+| [fzf-tab](https://github.com/Aloxaf/fzf-tab) | `Tab` abre un buscador fuzzy en vez del menú normal (con vista previa al hacer `cd`); `<` y `>` cambian de grupo |
+| [zoxide](https://github.com/ajeetdsouza/zoxide) | `z proy` salta a la carpeta más usada que coincida; `zi` la elige con fzf |
 | git | Alias de git de Oh My Zsh (`gst`, `gco`, `gp`…) |
 
 ## Qué va en el repo y qué no

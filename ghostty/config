@@ -10,3 +10,7 @@ window-padding-x = 2
 window-padding-y = 0
 window-padding-balance = true
 adjust-cell-height = -5%
+
+# Integración con el shell: saltar entre prompts, sudo conservando terminfo
+# y el título de la pestaña con el comando en curso
+shell-integration-features = cursor,sudo,title

@@ -10,25 +10,38 @@ ZSH_THEME=""
 # zsh-completions se añade a fpath (no como plugin) antes de cargar Oh My Zsh
 fpath+=("$ZSH_CUSTOM/plugins/zsh-completions/src")
 
+# fzf-tab va antes de los plugins que envuelven widgets (autosuggestions);
 # zsh-syntax-highlighting debe ir el último
 plugins=(
   git
   fzf
+  fzf-tab
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
 
-# El plugin fzf de Oh My Zsh avisa si fzf no está instalado; quitarlo en ese caso
-(( $+commands[fzf] )) || plugins=(${plugins:#fzf})
+# fzf y fzf-tab necesitan el binario fzf; quitarlos si no está instalado
+(( $+commands[fzf] )) || plugins=(${plugins:#fzf*})
 
 source "$ZSH/oh-my-zsh.sh"
 
 # Prompt
 source "${${(%):-%x}:A:h}/prompt.zsh"
 
-# fnm
+# fzf-tab: menú de Tab con búsqueda fuzzy y vista previa de carpetas
+zstyle ':completion:*' menu no
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'ls -1 --color=always $realpath'
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+# fnm (Homebrew en macOS, ~/.local/share/fnm con el instalador de Linux)
 FNM_PATH="$HOME/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="$FNM_PATH:$PATH"
-  eval "$(fnm env --use-on-cd --shell zsh)"
+[ -d "$FNM_PATH" ] && export PATH="$FNM_PATH:$PATH"
+if (( $+commands[fnm] )); then
+  eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 fi
+
+# zoxide: `z <parte del nombre>` salta a carpetas que ya visitaste
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
